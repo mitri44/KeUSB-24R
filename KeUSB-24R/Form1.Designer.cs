@@ -106,7 +106,7 @@
             this.groupBox1.Controls.Add(this.radioButton242);
             this.groupBox1.Controls.Add(this.radioButton220);
             this.groupBox1.Controls.Add(this.radioButton198);
-            this.groupBox1.Location = new System.Drawing.Point(402, 109);
+            this.groupBox1.Location = new System.Drawing.Point(573, 357);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(123, 122);
             this.groupBox1.TabIndex = 11;
@@ -122,7 +122,6 @@
             this.radioButton242.TabIndex = 2;
             this.radioButton242.Text = "242";
             this.radioButton242.UseVisualStyleBackColor = true;
-            this.radioButton242.CheckedChanged += new System.EventHandler(this.radioButtonPower_CheckedChanged);
             // 
             // radioButton220
             // 
@@ -133,7 +132,6 @@
             this.radioButton220.TabIndex = 1;
             this.radioButton220.Text = "220";
             this.radioButton220.UseVisualStyleBackColor = true;
-            this.radioButton220.CheckedChanged += new System.EventHandler(this.radioButtonPower_CheckedChanged);
             // 
             // radioButton198
             // 
@@ -146,7 +144,6 @@
             this.radioButton198.TabStop = true;
             this.radioButton198.Text = "198";
             this.radioButton198.UseVisualStyleBackColor = true;
-            this.radioButton198.CheckedChanged += new System.EventHandler(this.radioButtonPower_CheckedChanged);
             // 
             // label1
             // 
