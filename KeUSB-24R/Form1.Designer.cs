@@ -42,7 +42,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label_time_power_on = new System.Windows.Forms.Label();
             this.timerPowerOn = new System.Windows.Forms.Timer(this.components);
+            this.button198V = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button220V = new System.Windows.Forms.Button();
+            this.button242V = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxComPorts
@@ -168,12 +173,58 @@
             this.timerPowerOn.Interval = 1000;
             this.timerPowerOn.Tick += new System.EventHandler(this.timerPowerOn_Tick);
             // 
+            // button198V
+            // 
+            this.button198V.BackColor = System.Drawing.Color.Gray;
+            this.button198V.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.button198V.Location = new System.Drawing.Point(6, 34);
+            this.button198V.Name = "button198V";
+            this.button198V.Size = new System.Drawing.Size(94, 38);
+            this.button198V.TabIndex = 15;
+            this.button198V.Text = "198";
+            this.button198V.UseVisualStyleBackColor = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.button242V);
+            this.groupBox2.Controls.Add(this.button220V);
+            this.groupBox2.Controls.Add(this.button198V);
+            this.groupBox2.Location = new System.Drawing.Point(402, 103);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(123, 168);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "напряжение, вольт";
+            // 
+            // button220V
+            // 
+            this.button220V.BackColor = System.Drawing.Color.Gray;
+            this.button220V.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.button220V.Location = new System.Drawing.Point(6, 78);
+            this.button220V.Name = "button220V";
+            this.button220V.Size = new System.Drawing.Size(94, 38);
+            this.button220V.TabIndex = 15;
+            this.button220V.Text = "220";
+            this.button220V.UseVisualStyleBackColor = false;
+            // 
+            // button242V
+            // 
+            this.button242V.BackColor = System.Drawing.Color.Gray;
+            this.button242V.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.button242V.Location = new System.Drawing.Point(6, 122);
+            this.button242V.Name = "button242V";
+            this.button242V.Size = new System.Drawing.Size(94, 38);
+            this.button242V.TabIndex = 15;
+            this.button242V.Text = "242";
+            this.button242V.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1484, 761);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label_time_power_on);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
@@ -189,6 +240,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,6 +261,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label_time_power_on;
         private System.Windows.Forms.Timer timerPowerOn;
+        private System.Windows.Forms.Button button198V;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button242V;
+        private System.Windows.Forms.Button button220V;
     }
 }
 

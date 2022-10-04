@@ -181,9 +181,12 @@ namespace KeUSB_24R
 
             } else
             {
-                isPowerStatus = false;
                 timerPowerOn.Enabled = false;
-                
+                TimeSpan a = (DateTime.Now - timePowerOn);
+                label_time_power_on.Text = String.Format("{0:00}:{1:00}:{2:00}",
+                                                        a.Hours, a.Minutes, a.Seconds);
+                isPowerStatus = false;
+
                 OffRele2to4();
                 SendMessagePortRele(1, 0);
 
