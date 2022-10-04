@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeUSB-24R", "KeUSB-24R\KeUSB-24R.csproj", "{583E31A9-8EE3-4889-BDB2-B5A223A6735B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{583E31A9-8EE3-4889-BDB2-B5A223A6735B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{583E31A9-8EE3-4889-BDB2-B5A223A6735B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{583E31A9-8EE3-4889-BDB2-B5A223A6735B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{583E31A9-8EE3-4889-BDB2-B5A223A6735B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCA3733E-0D4F-4599-B942-6E9042EF0BA1}
+	EndGlobalSection
+EndGlobal
