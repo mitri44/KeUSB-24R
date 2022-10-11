@@ -23,6 +23,7 @@ namespace KeUSB_24R
         public Boolean is198V = false;
         public Boolean is220V = false;
         public Boolean is242V = false;
+        
 
         DateTime timePowerOn = new DateTime();
 
@@ -63,6 +64,33 @@ namespace KeUSB_24R
         {
             SendMessegePort("$KE,REL," + rel_number.ToString() + "," + sost_rele.ToString());
            
+        }
+
+        private void ButtonEnabled (Boolean onOff)
+        {
+            button198V.Enabled = onOff;
+            button220V.Enabled = onOff;
+            button242V.Enabled = onOff;
+        }
+
+        private void CicleStart (int delayReleOn , int countCicle)
+        {
+            delayReleOn = delayReleOn * 1000;
+            OffRele2to4();
+            ButtonEnabled(false);
+            
+            for (int i = 0; i < countCicle; i++)
+            {
+                button198V_Click(null, null); 
+                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
+                button220V_Click(null, null);
+                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
+                button242V_Click(null, null);
+                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
+            }
+
+            OffRele2to4();
+            ButtonEnabled(true);
         }
 
        
@@ -122,8 +150,11 @@ namespace KeUSB_24R
                 SendMessagePortRele(1, 0); // отключить все реле
                 
                 isConnected = true;
+                ButtonEnabled(true);
+                buttonConnect.BackColor = Color.Red;
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "messege", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -137,9 +168,17 @@ namespace KeUSB_24R
             try
             {
                 OffRele2to4();
-                SendMessegePort("$KE,REL,1,0");//сбросить все реле
+                SendMessegePort("$KE,REL,1,0");//сбросить  реле
+                if (isPowerStatus == true)
+                {
+                    button_power_Click(null, null);
+                }
+
+                
                 serialPort1.Close();
                 isConnected = false;
+                buttonConnect.BackColor = Color.Gray;
+
             }
             catch (Exception ex)
             {
@@ -183,6 +222,9 @@ namespace KeUSB_24R
                 timerPowerOn.Enabled = true;
 
                 button_power.BackColor = Color.Red;
+                
+                ButtonEnabled(true);
+
 
             } else
             {
@@ -195,6 +237,7 @@ namespace KeUSB_24R
                 }
                
                 isPowerStatus = false;
+                
 
                 OffRele2to4();
                 SendMessagePortRele(1, 0);
@@ -221,7 +264,7 @@ namespace KeUSB_24R
 
         private void button198V_Click(object sender, EventArgs e)
         {
-            if ((isPowerStatus == true) && (isConnected == true) && (is198V == false))
+            if ((isPowerStatus == true) && (isConnected == true) && (is198V == false)     )
             {
                 
                 OffRele2to4();
@@ -230,7 +273,7 @@ namespace KeUSB_24R
                 SendMessagePortRele(2, 1);                
                 is198V = true;
 
-            } else if (is198V == true)
+            } else if ((is198V == true) )
             {
                 OffRele2to4();
                 
@@ -239,7 +282,7 @@ namespace KeUSB_24R
 
         private void button220V_Click(object sender, EventArgs e)
         {
-            if ((isPowerStatus == true) && (isConnected == true) && (is220V == false))
+            if ((isPowerStatus == true) && (isConnected == true) && (is220V == false) )
             {
                 
                 OffRele2to4();
@@ -249,7 +292,7 @@ namespace KeUSB_24R
                 is220V = true;
 
             }
-            else if (is220V == true)
+            else if ((is220V == true) )
             {
                 OffRele2to4();
                 
@@ -258,7 +301,7 @@ namespace KeUSB_24R
 
         private void button242V_Click(object sender, EventArgs e)
         {
-            if ((isPowerStatus == true) && (isConnected == true) && (is242V == false))
+            if ((isPowerStatus == true) && (isConnected == true) && (is242V == false) )
             {
                 OffRele2to4();
                 button242V.BackColor = Color.Red;
@@ -269,11 +312,34 @@ namespace KeUSB_24R
 
 
             }
-            else if (is242V == true)
+            else if ((is242V == true))
             {
                 OffRele2to4();
                 
             }
+        }
+
+        private void buttonCicleStart_Click(object sender, EventArgs e)
+        {
+            if ((isPowerStatus == true) && (isConnected == true))
+            {
+                int timedelay = (int)numericUpDownPause.Value;
+                int countCicle = (int)numericUpDownCountCicle.Value;
+
+                if (timedelay != 0 && countCicle != 0)
+                {
+                    buttonCicleStart.BackColor = Color.Red;
+                    CicleStart(timedelay, countCicle);
+                    buttonCicleStart.BackColor = Color.Gray;
+                }
+
+            }
+            
+            
+        
+
+
+
         }
     }
 }

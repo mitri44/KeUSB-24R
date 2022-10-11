@@ -42,7 +42,16 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button242V = new System.Windows.Forms.Button();
             this.button220V = new System.Windows.Forms.Button();
+            this.numericUpDownPause = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDownCountCicle = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonCicleStart = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPause)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCicle)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxComPorts
@@ -56,12 +65,14 @@
             // 
             // buttonConnect
             // 
+            this.buttonConnect.BackColor = System.Drawing.Color.Gray;
+            this.buttonConnect.ForeColor = System.Drawing.Color.PapayaWhip;
             this.buttonConnect.Location = new System.Drawing.Point(25, 219);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(140, 69);
             this.buttonConnect.TabIndex = 3;
             this.buttonConnect.Text = "подключиться";
-            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.UseVisualStyleBackColor = false;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
             // 
             // serialPort1
@@ -172,12 +183,102 @@
             this.button220V.UseVisualStyleBackColor = false;
             this.button220V.Click += new System.EventHandler(this.button220V_Click);
             // 
+            // numericUpDownPause
+            // 
+            this.numericUpDownPause.Location = new System.Drawing.Point(135, 61);
+            this.numericUpDownPause.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericUpDownPause.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownPause.Name = "numericUpDownPause";
+            this.numericUpDownPause.Size = new System.Drawing.Size(79, 20);
+            this.numericUpDownPause.TabIndex = 15;
+            this.numericUpDownPause.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "пауза, сек";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(135, 101);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "кол-во циклов";
+            // 
+            // numericUpDownCountCicle
+            // 
+            this.numericUpDownCountCicle.Location = new System.Drawing.Point(135, 120);
+            this.numericUpDownCountCicle.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericUpDownCountCicle.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownCountCicle.Name = "numericUpDownCountCicle";
+            this.numericUpDownCountCicle.Size = new System.Drawing.Size(79, 20);
+            this.numericUpDownCountCicle.TabIndex = 17;
+            this.numericUpDownCountCicle.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonCicleStart);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.numericUpDownPause);
+            this.groupBox1.Controls.Add(this.numericUpDownCountCicle);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(583, 103);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(222, 168);
+            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "циклы";
+            // 
+            // buttonCicleStart
+            // 
+            this.buttonCicleStart.BackColor = System.Drawing.Color.Gray;
+            this.buttonCicleStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCicleStart.ForeColor = System.Drawing.Color.PapayaWhip;
+            this.buttonCicleStart.Location = new System.Drawing.Point(17, 42);
+            this.buttonCicleStart.Name = "buttonCicleStart";
+            this.buttonCicleStart.Size = new System.Drawing.Size(92, 40);
+            this.buttonCicleStart.TabIndex = 19;
+            this.buttonCicleStart.Text = "запуск циклов";
+            this.buttonCicleStart.UseVisualStyleBackColor = false;
+            this.buttonCicleStart.Click += new System.EventHandler(this.buttonCicleStart_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1484, 761);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label_time_power_on);
             this.Controls.Add(this.label1);
@@ -191,6 +292,10 @@
             this.Text = "PH-metr";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPause)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCicle)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -211,6 +316,12 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button242V;
         private System.Windows.Forms.Button button220V;
+        private System.Windows.Forms.NumericUpDown numericUpDownPause;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDownCountCicle;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonCicleStart;
     }
 }
 
