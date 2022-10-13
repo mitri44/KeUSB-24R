@@ -48,10 +48,18 @@
             this.numericUpDownCountCicle = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonCicleStart = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.labelTimeHeating = new System.Windows.Forms.Label();
+            this.numericUpDownHeatingTime = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.timerCicleOn = new System.Windows.Forms.Timer(this.components);
+            this.timerHeating = new System.Windows.Forms.Timer(this.components);
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPause)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCicle)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeatingTime)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxComPorts
@@ -96,7 +104,7 @@
             this.textBoxMessege.Name = "textBoxMessege";
             this.textBoxMessege.ReadOnly = true;
             this.textBoxMessege.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxMessege.Size = new System.Drawing.Size(326, 195);
+            this.textBoxMessege.Size = new System.Drawing.Size(326, 289);
             this.textBoxMessege.TabIndex = 5;
             // 
             // button_power
@@ -252,7 +260,7 @@
             this.groupBox1.Controls.Add(this.numericUpDownPause);
             this.groupBox1.Controls.Add(this.numericUpDownCountCicle);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(583, 103);
+            this.groupBox1.Location = new System.Drawing.Point(402, 294);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(222, 168);
             this.groupBox1.TabIndex = 19;
@@ -272,12 +280,64 @@
             this.buttonCicleStart.UseVisualStyleBackColor = false;
             this.buttonCicleStart.Click += new System.EventHandler(this.buttonCicleStart_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.labelTimeHeating);
+            this.groupBox3.Controls.Add(this.numericUpDownHeatingTime);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Location = new System.Drawing.Point(662, 39);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(274, 100);
+            this.groupBox3.TabIndex = 20;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "прогрев";
+            // 
+            // labelTimeHeating
+            // 
+            this.labelTimeHeating.AutoSize = true;
+            this.labelTimeHeating.Location = new System.Drawing.Point(124, 52);
+            this.labelTimeHeating.Name = "labelTimeHeating";
+            this.labelTimeHeating.Size = new System.Drawing.Size(10, 13);
+            this.labelTimeHeating.TabIndex = 23;
+            this.labelTimeHeating.Text = "-";
+            // 
+            // numericUpDownHeatingTime
+            // 
+            this.numericUpDownHeatingTime.Location = new System.Drawing.Point(6, 50);
+            this.numericUpDownHeatingTime.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.numericUpDownHeatingTime.Name = "numericUpDownHeatingTime";
+            this.numericUpDownHeatingTime.Size = new System.Drawing.Size(79, 20);
+            this.numericUpDownHeatingTime.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(115, 13);
+            this.label4.TabIndex = 22;
+            this.label4.Text = "время прогрева, мин";
+            // 
+            // timerCicleOn
+            // 
+            this.timerCicleOn.Tick += new System.EventHandler(this.timerCicleOn_Tick);
+            // 
+            // timerHeating
+            // 
+            this.timerHeating.Interval = 1000;
+            this.timerHeating.Tick += new System.EventHandler(this.timerHeating_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1484, 761);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label_time_power_on);
@@ -296,6 +356,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCicle)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHeatingTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,6 +385,12 @@
         private System.Windows.Forms.NumericUpDown numericUpDownCountCicle;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button buttonCicleStart;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label labelTimeHeating;
+        private System.Windows.Forms.NumericUpDown numericUpDownHeatingTime;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Timer timerCicleOn;
+        private System.Windows.Forms.Timer timerHeating;
     }
 }
 

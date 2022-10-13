@@ -23,7 +23,17 @@ namespace KeUSB_24R
         public Boolean is198V = false;
         public Boolean is220V = false;
         public Boolean is242V = false;
-        
+
+        // серия флагов/переменных для сиклов
+        public Boolean isCicleOn = false;
+        public int cicleCount = 0;
+        public int cicleReleOn = 0; //какое реле работало последним 198-2, 220-3, 242-4
+
+        // для прогрева
+        public Boolean isHearting = false;
+        public int timeHeating;
+
+
 
         DateTime timePowerOn = new DateTime();
 
@@ -66,31 +76,48 @@ namespace KeUSB_24R
            
         }
 
-        private void ButtonEnabled (Boolean onOff)
+        private void Button198220242Enabled (Boolean onOff)
         {
             button198V.Enabled = onOff;
             button220V.Enabled = onOff;
             button242V.Enabled = onOff;
         }
 
+        private void ButtonAllEneble (Boolean onOff)
+        {
+            Button198220242Enabled(onOff);
+            buttonCicleStart.Enabled = onOff;
+        }
+        
+
         private void CicleStart (int delayReleOn , int countCicle)
         {
             delayReleOn = delayReleOn * 1000;
             OffRele2to4();
-            ButtonEnabled(false);
-            
-            for (int i = 0; i < countCicle; i++)
-            {
-                button198V_Click(null, null); 
-                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
-                button220V_Click(null, null);
-                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
-                button242V_Click(null, null);
-                Thread.Sleep(delayReleOn); // потом заменить на таймер. Пока так
-            }
+            Button198220242Enabled(false);
+            isCicleOn = true;
 
-            OffRele2to4();
-            ButtonEnabled(true);
+            cicleCount = countCicle * 3 ; // по кол-ву реле 
+            timerCicleOn.Interval = delayReleOn + delay_off_rele;    
+            timerCicleOn.Enabled = true;
+
+            cicleReleOn = 2; // установили флаг, что работает реле 2
+            button198V_Click(null, null); // пуск первого реле
+            
+
+        }
+
+        private void PowerHeating()
+        {
+            
+            timeHeating = (int)numericUpDownHeatingTime.Value * 60; // определяем в сек
+            if (timeHeating > 0)
+            {
+                ButtonAllEneble(false);
+                isHearting = true;
+                timerHeating.Enabled = true;
+
+            }
         }
 
        
@@ -140,25 +167,29 @@ namespace KeUSB_24R
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            try
+            if (isConnected == false)
             {
-                serialPort1.PortName = comboBoxComPorts.Text;
-                serialPort1.Open();
-                SendMessegePort("$KE");
+                try
+                {
+                    serialPort1.PortName = comboBoxComPorts.Text;
+                    serialPort1.Open();
+                    SendMessegePort("$KE");
 
-                OffRele2to4();
-                SendMessagePortRele(1, 0); // отключить все реле
-                
-                isConnected = true;
-                ButtonEnabled(true);
-                buttonConnect.BackColor = Color.Red;
+                    OffRele2to4();
+                    SendMessagePortRele(1, 0); // отключить все реле
 
+                    isConnected = true;
+                    Button198220242Enabled(true);
+                    buttonConnect.BackColor = Color.Red;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "messege", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "messege", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+           
             
             
         }
@@ -223,7 +254,9 @@ namespace KeUSB_24R
 
                 button_power.BackColor = Color.Red;
                 
-                ButtonEnabled(true);
+                Button198220242Enabled(true);
+                PowerHeating();
+                
 
 
             } else
@@ -243,7 +276,14 @@ namespace KeUSB_24R
                 SendMessagePortRele(1, 0);
 
                 button_power.BackColor = Color.Gray;
+                isHearting = false;
+                ButtonAllEneble(true);
+                labelTimeHeating.Text = "-";
             }
+
+            isCicleOn = false;
+            timerCicleOn.Enabled = false;
+            buttonCicleStart.BackColor = Color.Gray;
         }
 
         
@@ -321,7 +361,7 @@ namespace KeUSB_24R
 
         private void buttonCicleStart_Click(object sender, EventArgs e)
         {
-            if ((isPowerStatus == true) && (isConnected == true))
+            if ((isPowerStatus == true) && (isConnected == true) && (isCicleOn == false))
             {
                 int timedelay = (int)numericUpDownPause.Value;
                 int countCicle = (int)numericUpDownCountCicle.Value;
@@ -330,16 +370,80 @@ namespace KeUSB_24R
                 {
                     buttonCicleStart.BackColor = Color.Red;
                     CicleStart(timedelay, countCicle);
-                    buttonCicleStart.BackColor = Color.Gray;
+                    //buttonCicleStart.BackColor = Color.Gray;
                 }
 
+            } else if (isCicleOn == true)
+            {
+                timerCicleOn.Enabled = false;
+                isCicleOn = false;
+                buttonCicleStart.BackColor = Color.Gray;
+                OffRele2to4();
+                Button198220242Enabled(true);
+
+
+
             }
-            
-            
-        
 
 
 
+
+
+
+        }
+
+        private void timerCicleOn_Tick(object sender, EventArgs e)
+        {
+            if (isCicleOn == true)
+            {
+                if (cicleCount > 0)
+                {
+                    if (cicleReleOn == 2)
+                    {
+                        button198V_Click(null, null);
+                        cicleReleOn = 3;
+                    }
+                    else if (cicleReleOn == 3)
+                    {
+                        button220V_Click(null, null);
+                        cicleReleOn = 4;
+                    }
+                    else if (cicleReleOn == 4)
+                    {
+                        button242V_Click(null, null);
+                        cicleReleOn = 2;
+                    }
+
+                    cicleCount -= 1;
+
+                } else
+                {
+                    isCicleOn = false;
+                    OffRele2to4();
+                    timerCicleOn.Enabled = false;
+                    buttonCicleStart.BackColor = Color.Gray;
+                }
+                
+            }
+        }
+
+        private void timerHeating_Tick(object sender, EventArgs e)
+        {
+            if (isHearting == true)
+            {
+                if (timeHeating >= 0)
+                {
+                    labelTimeHeating.Text = Convert.ToString(timeHeating);
+                    timeHeating -= 1; 
+                } else
+                {
+                    ButtonAllEneble(true);
+                    isHearting = false;
+                    timerHeating.Enabled = false;
+                    labelTimeHeating.Text = "-";
+
+                }
+            }
         }
     }
 }
