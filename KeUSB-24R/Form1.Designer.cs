@@ -54,6 +54,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.timerCicleOn = new System.Windows.Forms.Timer(this.components);
             this.timerHeating = new System.Windows.Forms.Timer(this.components);
+            this.labelCountToEndCicle = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPause)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCountCicle)).BeginInit();
@@ -218,9 +219,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(135, 42);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 13);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 16;
-            this.label2.Text = "пауза, сек";
+            this.label2.Text = "пауза, мин";
             // 
             // label3
             // 
@@ -255,6 +256,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelCountToEndCicle);
             this.groupBox1.Controls.Add(this.buttonCicleStart);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.numericUpDownPause);
@@ -331,6 +333,15 @@
             this.timerHeating.Interval = 1000;
             this.timerHeating.Tick += new System.EventHandler(this.timerHeating_Tick);
             // 
+            // labelCountToEndCicle
+            // 
+            this.labelCountToEndCicle.AutoSize = true;
+            this.labelCountToEndCicle.Location = new System.Drawing.Point(17, 101);
+            this.labelCountToEndCicle.Name = "labelCountToEndCicle";
+            this.labelCountToEndCicle.Size = new System.Drawing.Size(10, 13);
+            this.labelCountToEndCicle.TabIndex = 20;
+            this.labelCountToEndCicle.Text = "-";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -391,6 +402,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Timer timerCicleOn;
         private System.Windows.Forms.Timer timerHeating;
+        private System.Windows.Forms.Label labelCountToEndCicle;
     }
 }
 

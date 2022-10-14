@@ -98,6 +98,7 @@ namespace KeUSB_24R
             isCicleOn = true;
 
             cicleCount = countCicle * 3 ; // по кол-ву реле 
+            labelCountToEndCicle.Text = "осталось: " + Convert.ToString((int)(cicleCount / 3));
             timerCicleOn.Interval = delayReleOn + delay_off_rele;    
             timerCicleOn.Enabled = true;
 
@@ -284,6 +285,7 @@ namespace KeUSB_24R
             isCicleOn = false;
             timerCicleOn.Enabled = false;
             buttonCicleStart.BackColor = Color.Gray;
+            labelCountToEndCicle.Text = "-";
         }
 
         
@@ -363,12 +365,13 @@ namespace KeUSB_24R
         {
             if ((isPowerStatus == true) && (isConnected == true) && (isCicleOn == false))
             {
-                int timedelay = (int)numericUpDownPause.Value;
+                int timedelay = (int)numericUpDownPause.Value * 60;
                 int countCicle = (int)numericUpDownCountCicle.Value;
 
                 if (timedelay != 0 && countCicle != 0)
                 {
                     buttonCicleStart.BackColor = Color.Red;
+                    
                     CicleStart(timedelay, countCicle);
                     //buttonCicleStart.BackColor = Color.Gray;
                 }
@@ -380,6 +383,7 @@ namespace KeUSB_24R
                 buttonCicleStart.BackColor = Color.Gray;
                 OffRele2to4();
                 Button198220242Enabled(true);
+                labelCountToEndCicle.Text = "-";
 
 
 
@@ -413,8 +417,9 @@ namespace KeUSB_24R
                         button242V_Click(null, null);
                         cicleReleOn = 2;
                     }
-
+                    
                     cicleCount -= 1;
+                    labelCountToEndCicle.Text = "осталось: " + Convert.ToString((int)(cicleCount / 3) + 1);
 
                 } else
                 {
@@ -422,6 +427,7 @@ namespace KeUSB_24R
                     OffRele2to4();
                     timerCicleOn.Enabled = false;
                     buttonCicleStart.BackColor = Color.Gray;
+                    labelCountToEndCicle.Text = "-";
                 }
                 
             }
